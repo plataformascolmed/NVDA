@@ -1,6 +1,6 @@
-"use client"
-import { useState, useTransition } from "react"
+import { useState, useTransition, useEffect, Suspense } from "react"
 import Link from "next/link"
+import { useSearchParams } from "next/navigation"
 import { registerAction } from "@/app/auth/actions"
 import { Button } from "@/components/ui/Button"
 import { Input } from "@/components/ui/Input"
@@ -8,9 +8,18 @@ import { toast } from "react-hot-toast"
 import { User, Mail, Lock, Gift, CheckCircle2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-export default function RegisterPage() {
+function RegisterForm() {
   const [isPending, startTransition] = useTransition()
   const [acceptedTerms, setAcceptedTerms] = useState(false)
+  const searchParams = useSearchParams()
+  const [refCode, setRefCode] = useState("")
+
+  useEffect(() => {
+    const code = searchParams.get('ref')
+    if (code) {
+      setRefCode(code.toUpperCase())
+    }
+  }, [searchParams])
 
   async function handleSubmit(formData: FormData) {
     if (!acceptedTerms) {
@@ -75,7 +84,13 @@ export default function RegisterPage() {
               <label className="text-sm font-medium text-gray-400 ml-1">Código de referido (opcional)</label>
               <div className="relative">
                 <Gift className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
-                <Input name="referredBy" placeholder="Ej: NVDA_ABCD" className="pl-11 uppercase" />
+                <Input 
+                  name="referredBy" 
+                  placeholder="Ej: NVDA_ABCD" 
+                  className="pl-11 uppercase" 
+                  value={refCode}
+                  onChange={(e) => setRefCode(e.target.value)}
+                />
               </div>
             </div>
 
@@ -115,5 +130,13 @@ export default function RegisterPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function RegisterPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center text-white">Cargando...</div>}>
+      <RegisterForm />
+    </Suspense>
   )
 }
