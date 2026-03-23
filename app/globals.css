@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@theme {
+  --font-space: "Space Grotesk", sans-serif;
+  --font-inter: "Inter", sans-serif;
+
+  --color-nvda-bg: #0a0a0f;
+  --color-nvda-surface: #111118;
+  --color-nvda-card: #16161f;
+  --color-nvda-border: #1e1e2e;
+  --color-nvda-green: #76b900;
+  --color-nvda-green-dim: #76b90020;
+  --color-nvda-cyan: #00d4ff;
+  --color-nvda-white: #f1f1f1;
+  --color-nvda-muted: #6b7280;
+  --color-nvda-red: #ef4444;
+  --color-nvda-gold: #f59e0b;
+
+  --animate-marquee: marquee 25s linear infinite;
+  --animate-pulse-green: pulse-green 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @keyframes pulse-green {
+    0%, 100% {
+      opacity: 1;
+      box-shadow: 0 0 0 0 rgba(118, 185, 0, 0.4);
+    }
+    50% {
+      opacity: .8;
+      box-shadow: 0 0 0 10px rgba(118, 185, 0, 0);
+    }
+  }
+}
+
+:root {
+  --background: #0a0a0f;
+  --foreground: #f1f1f1;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-space);
+}
+
+.noise-texture {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.03;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0f;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e1e2e;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #76b90040;
+}
+
+/* Glassmorphism Classes */
+.glass {
+  background: rgba(22, 22, 31, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.nvda-glow {
+  box-shadow: 0 0 20px rgba(118, 185, 0, 0.2);
+}
+
+.nvda-glow:hover {
+  box-shadow: 0 0 30px rgba(118, 185, 0, 0.3);
+}
+
+/* Layout transition */
+.page-transition {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+}
