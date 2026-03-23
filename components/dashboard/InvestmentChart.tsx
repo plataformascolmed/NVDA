@@ -56,7 +56,7 @@ export const InvestmentChart = ({ totalInvested = 0 }: { totalInvested?: number 
           <Tooltip 
             contentStyle={{ backgroundColor: "#16161f", border: "1px solid #1e1e2e", borderRadius: "8px" }}
             itemStyle={{ color: "#76b900" }}
-            formatter={(value: number) => [formatCOP(value), "Inversión"]}
+            formatter={(value: any) => [formatCOP(value), "Inversión"]}
           />
           <Area
             type="monotone"

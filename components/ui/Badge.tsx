@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils"
 
 interface BadgeProps {
   children: React.ReactNode
-  variant?: 'PENDING' | 'REVIEWING' | 'APPROVED' | 'REJECTED' | 'ADMIN' | 'INVESTOR' | 'default'
+  variant?: 'PENDING' | 'REVIEWING' | 'APPROVED' | 'REJECTED' | 'ADMIN' | 'INVESTOR' | 'default' | 'COMPLETED' | 'CANCELLED'
   className?: string
 }
 

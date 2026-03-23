@@ -90,7 +90,7 @@ export default function AdminWithdrawalsClient({ withdrawals: initialWithdrawals
                     {formatDate(w.created_at)}
                   </td>
                   <td className="px-6 py-5">
-                    <Badge variant={w.status}>{w.status}</Badge>
+                    <Badge variant={w.status as any}>{w.status}</Badge>
                   </td>
                   <td className="px-6 py-5 text-center">
                     <div className="flex items-center justify-center gap-3">
