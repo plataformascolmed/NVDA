@@ -38,10 +38,10 @@ export default async function DashboardLayout({
   console.log("📊 Datos recibidos:", profile ? `ID: ${profile.id}, ROL: ${profile.role}, BAL: ${profile.balance}` : "¡PERFIL VACÍO!");
 
   return (
-    <div className="min-h-screen bg-transparent text-white">
+    <div className="min-h-screen bg-transparent text-white overflow-x-hidden">
       <Sidebar user={user} profile={profile} />
-      <main className="pl-[260px] min-h-screen">
-        <div className="p-8 max-w-7xl mx-auto">
+      <main className="lg:pl-[280px] min-h-screen transition-all duration-300">
+        <div className="p-4 md:p-8 max-w-7xl mx-auto">
           {children}
         </div>
       </main>
