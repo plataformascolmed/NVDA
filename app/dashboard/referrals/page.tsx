@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server"
 import { StatCard } from "@/components/ui/StatCard"
 import { Badge } from "@/components/ui/Badge"
 import { Gift, Share2, Users, ArrowUpRight, ShieldCheck } from "lucide-react"
+import { ReferralLink } from "@/components/dashboard/ReferralLink"
 
 export default async function ReferralsPage() {
   const supabase = await createClient()
@@ -27,8 +28,6 @@ export default async function ReferralsPage() {
   // Calcular bonos totales de referidos completados
   const totalBonuses = referrals?.reduce((acc: number, curr: any) => acc + (Number(curr.bonus) || 0), 0) || 0
 
-  const shareUrl = `https://nvdacapital.co/auth/register?ref=${profile?.referral_code}`
-
   return (
     <div className="space-y-10">
       <div>
@@ -43,31 +42,7 @@ export default async function ReferralsPage() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="bg-[#111118]/80 backdrop-blur-xl border border-[#1e1e2e] rounded-[40px] p-10 space-y-6 relative overflow-hidden group">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-[#76b900]/5 blur-3xl rounded-full" />
-          <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-            <Share2 className="h-5 w-5 text-[#76b900]" /> Comparte tu enlace
-          </h3>
-          <p className="text-sm text-gray-400 font-medium leading-relaxed">
-            Invita a otros a unirse a NVDA Capital. Al realizar su primera inversión, recibirás un bono del 10% del monto invertido.
-          </p>
-          
-          <div className="p-5 bg-[#0a0a0f] border border-[#1e1e2e] rounded-2xl flex items-center justify-between group/copy">
-            <span className="text-[10px] font-mono text-gray-500 truncate mr-4">{shareUrl}</span>
-            <button className="text-[10px] font-black text-[#76b900] bg-[#76b900]/10 px-4 py-2 rounded-xl hover:bg-[#76b900]/20 transition-all shrink-0 uppercase tracking-widest border border-[#76b900]/10">
-              Copiar
-            </button>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <button className="flex items-center justify-center gap-2 px-4 py-4 bg-[#25D366]/5 text-[#25D366] rounded-2xl font-bold text-[10px] hover:bg-[#25D366]/10 transition-all border border-[#25D366]/10 uppercase tracking-widest">
-              WhatsApp
-            </button>
-            <button className="flex items-center justify-center gap-2 px-4 py-4 bg-[#0088cc]/5 text-[#0088cc] rounded-2xl font-bold text-[10px] hover:bg-[#0088cc]/10 transition-all border border-[#0088cc]/10 uppercase tracking-widest">
-              Telegram
-            </button>
-          </div>
-        </div>
+        <ReferralLink referralCode={profile?.referral_code || ""} />
 
         <div className="bg-[#111118]/80 backdrop-blur-xl border border-[#1e1e2e] rounded-[40px] p-10 space-y-6">
           <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
